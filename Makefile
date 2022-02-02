@@ -1,4 +1,4 @@
-REQUIRED_BINS := docker docker-compose
+REQUIRED_BINS := podman docker-compose
 $(foreach bin,$(REQUIRED_BINS), \
     $(if $(shell command -v $(bin) 2> /dev/null),$(),$(error please install missing build requirement: `$(bin)`)))
 
@@ -7,14 +7,15 @@ all: build run
 
 .PHONY: build
 build:
-	docker build                  \
+	podman build                  \
 	  --tag "ts3:latest"          \
 	  --tag "ts3:3.13.6"          \
 	  .
 
 .PHONY: run
 run:
-	docker run                    \
+	mkdir -p data
+	podman run                    \
 	  --name=ts3server            \
 	  --interactive               \
 	  --tty                       \
