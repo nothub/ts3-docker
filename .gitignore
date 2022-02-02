@@ -1,0 +1,26 @@
+# ignore all files
+*
+# but include directories
+!*/
+
+# git
+!/**/.gitkeep
+!/.gitignore
+
+# docker
+!/Dockerfile
+!/docker-compose.yml
+!/entrypoint.sh
+
+# build
+!/Makefile
+
+# ci
+!/.github/**
+
+# docs
+!/*.md
+
+# misc
+!/.editorconfig
+!/LICENSE
