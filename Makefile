@@ -33,4 +33,4 @@ run:
 	  -v ${PWD}/data:/data        \
 	  "ts3:dev"
 
-.PHONY: all build run
+.PHONY: all clean build run
