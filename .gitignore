@@ -4,12 +4,10 @@
 !*/
 
 # git
-!/**/.gitkeep
 !/.gitignore
 
 # docker
 !/Dockerfile
-!/docker-compose.yml
 !/entrypoint.sh
 
 # build
