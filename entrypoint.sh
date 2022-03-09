@@ -2,12 +2,12 @@
 set -eux
 
 addgroup                                                        \
-      --gid "${TS3SERVER_GID}"  `#Group id`                     \
+      --gid "${PGID}"           `#Group id`                     \
       --system                  `#Create a system group`        \
       teamspeak
 
 adduser                                                         \
-      --uid "${TS3SERVER_UID}"  `#User id`                      \
+      --uid "${PUID}"           `#User id`                      \
       --system                  `#Create a system user`         \
       --ingroup teamspeak       `#Add user to existing group`   \
       --disabled-password       `#Do not assign a password`     \
