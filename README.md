@@ -1,6 +1,6 @@
 ## ts3-docker
 
-[docker hub](https://hub.docker.com/repository/docker/n0thub/ts3)
+[docker hub](https://hub.docker.com/r/n0thub/ts3)
 
 ---
 
