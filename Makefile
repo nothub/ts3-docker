@@ -1,4 +1,4 @@
-DOCKER = podman
+DOCKER = docker
 
 all: clean build run
 
@@ -6,7 +6,6 @@ clean:
 	-$(DOCKER) stop ts3:dev
 	-$(DOCKER) rm -f ts3:dev
 	-$(DOCKER) rmi -f ts3:dev
-	-$(DOCKER) unshare rm -rf $(CURDIR)/data
 
 build:
 	$(DOCKER) build               \

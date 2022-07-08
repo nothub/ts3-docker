@@ -19,6 +19,5 @@
 ### webquery curl example
 
 ```bash
-API_KEY="FooBar2IHhPcvwI3tD7G9sFrPOGn5QdOrI1nWsH"
-curl -H "x-api-key: $API_KEY" 127.0.0.1:10080/serverinfo | jq
+curl -H "x-api-key: $api_key" 127.0.0.1:10080/serverinfo | jq
 ```
