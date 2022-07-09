@@ -8,8 +8,8 @@ clean:
 	-$(DOCKER) rmi -f ts3:dev
 
 build:
-	$(DOCKER) build               \
-	  --tag "ts3:dev"             \
+	$(DOCKER) build            \
+	  --tag "ts3:dev"          \
 	  .
 
 run:
