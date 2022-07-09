@@ -27,5 +27,4 @@ if ! grep "${QUERY_CLIENT}" /data/query_ip_allowlist.txt >/dev/null 2>&1; then
     echo "${QUERY_CLIENT}" >>/data/query_ip_allowlist.txt
 fi
 
-TS3SERVER_LICENSE=${LICENSE}
 exec su-exec teamspeak:teamspeak /opt/ts3/ts3server dbsqlpath=/opt/ts3/sql/ "$@"

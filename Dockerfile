@@ -14,7 +14,7 @@ ARG DOWNLOAD_URL=https://files.teamspeak-services.com/releases/server/${VERSION}
 ENV PUID=1000
 ENV PGID=1000
 
-ENV LICENSE=view
+ENV TS3SERVER_LICENSE=view
 ENV QUERY_CLIENT=""
 
 ADD ${DOWNLOAD_URL} /tmp/server.tar.bz2
