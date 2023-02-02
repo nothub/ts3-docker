@@ -7,9 +7,9 @@ RUN apk add --no-cache \
     su-exec            \
     tini
 
-ARG VERSION=3.13.7
-ARG DOWNLOAD_CHECKSUM=359aac972679cfd98d62af51ddaf80e674cab166e13c6a835e81759097f9ba2e
-ARG DOWNLOAD_URL=https://files.teamspeak-services.com/releases/server/${VERSION}/teamspeak3-server_linux_alpine-${VERSION}.tar.bz2
+ARG VERSION="3.13.7"
+ARG DOWNLOAD_CHECKSUM="359aac972679cfd98d62af51ddaf80e674cab166e13c6a835e81759097f9ba2e"
+ARG DOWNLOAD_URL="https://files.teamspeak-services.com/releases/server/${VERSION}/teamspeak3-server_linux_alpine-${VERSION}.tar.bz2"
 
 ENV PUID=1000
 ENV PGID=1000
