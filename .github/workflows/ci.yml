@@ -1,10 +1,10 @@
-name: publish
+name: ci
 on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '20 4 * * *'
+    tags:
+      - 'v*'
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -30,19 +30,32 @@ jobs:
           sarif_file: 'trivy.sarif'
 
       - name: 'Find TS3 version'
+        if: startsWith(github.ref, 'refs/tags/v') == true
         run: echo "TS3_VERSION=$(echo "$(cat Dockerfile | grep "VERSION=")" | sed -E 's/.*=//g' | tr -d '"')" >> $GITHUB_ENV
 
-      - name: 'Registry login'
+      - name: 'Docker Hub login'
         uses: docker/login-action@v2
+        if: startsWith(github.ref, 'refs/tags/v') == true
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 'Build and publish image'
+      - name: 'Publish to Docker Hub'
         uses: docker/build-push-action@v4
+        if: startsWith(github.ref, 'refs/tags/v') == true
         with:
           context: .
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:${{ env.TS3_VERSION }}
+
+      - name: 'Trigger deployment'
+        if: startsWith(github.ref, 'refs/tags/v') == true
+        run: >
+          curl
+          --fail
+          --head
+          --no-progress-meter
+          --header "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}"
+          "${{ secrets.WATCHTOWER_URL }}"
