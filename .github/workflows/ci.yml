@@ -33,7 +33,7 @@ jobs:
         run: echo "TS3_VERSION=$(echo "$(cat Dockerfile | grep "VERSION=")" | sed -E 's/.*=//g' | tr -d '"')" >> $GITHUB_ENV
 
       - name: 'Docker Hub login'
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
