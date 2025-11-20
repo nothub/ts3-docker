@@ -11,7 +11,7 @@ jobs:
     steps:
 
       - name: 'Checkout repo'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 'Find TS3 version'
         run: echo "TS3_VERSION=$(echo "$(cat Dockerfile | grep "VERSION=")" | sed -E 's/.*=//g' | tr -d '"')" >> $GITHUB_ENV
