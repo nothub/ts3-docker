@@ -30,12 +30,3 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:${{ env.TS3_VERSION }}
-
-      - name: 'Trigger deployment'
-        run: >
-          curl
-          --fail
-          --head
-          --no-progress-meter
-          --header "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}"
-          "${{ secrets.WATCHTOWER_URL }}"
