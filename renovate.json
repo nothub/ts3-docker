@@ -1,0 +1,35 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "configMigration": true,
+  "minimumReleaseAge": "7 days",
+  "semanticCommits": "enabled",
+  "timezone": "Europe/Berlin",
+  "customDatasources": {
+    "teamspeak-server": {
+      "defaultRegistryUrlTemplate": "https://www.teamspeak.com/versions/server.json",
+      "transformTemplates": [
+        "{\"releases\": [{\"version\": linux.x86_64.version}]}"
+      ]
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
+      "matchStrings": ["ARG VERSION=\"(?<currentValue>[^\"]+)\""],
+      "datasourceTemplate": "custom.teamspeak-server",
+      "depNameTemplate": "teamspeak-server"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": ["teamspeak-server"],
+      "minimumReleaseAgeBehaviour": "timestamp-optional",
+      "postUpgradeTasks": {
+        "commands": ["./update-checksum.sh"],
+        "fileFilters": ["Dockerfile"],
+        "executionMode": "update"
+      }
+    }
+  ]
+}
