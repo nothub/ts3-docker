@@ -3,8 +3,13 @@ on:
   push:
     branches:
       - trunk
-  schedule:
-    - cron: '20 4 * * *'
+    paths:
+      - Dockerfile
+      - entrypoint.sh
+      - .github/workflows/publish.yaml
+  workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -30,3 +35,14 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/ts3:${{ env.TS3_VERSION }}
+
+      # Base image digest bumps rebuild the same TS3 version, so the tag may already exist.
+      - name: 'Tag release'
+        run: |
+          tag="v${TS3_VERSION}"
+          if test -n "$(git ls-remote --tags origin "refs/tags/${tag}")"; then
+            echo "${tag} exists"
+            exit 0
+          fi
+          git tag "${tag}"
+          git push origin "${tag}"
